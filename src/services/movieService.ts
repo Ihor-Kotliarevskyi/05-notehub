@@ -1,24 +1,20 @@
 import axios from "axios";
-import type { Movie } from "../types/movie";
+import type { Note } from "../types/movie";
 
-export interface MoviesHttpResponse {
-  results: Movie[];
+export interface NotesHttpResponse {
+  results: Note[];
   total_pages: number;
   total_results: number;
 }
 
-const MY_KEY = import.meta.env.VITE_TMDB_TOKEN;
+const MY_KEY = import.meta.env.VITE_NOTEHUB_TOKEN;
 
 export const fetchMovies = async (
-  query: string,
-  currentPage: number
-): Promise<MoviesHttpResponse> => {
+  query: string
+): Promise<NotesHttpResponse> => {
   const options = {
     params: {
       query,
-      include_adult: false,
-      language: "en-US",
-      page: currentPage,
     },
     headers: {
       accept: "application/json",
@@ -26,10 +22,7 @@ export const fetchMovies = async (
     },
   };
 
-  const response = await axios.get<MoviesHttpResponse>(
-    `https://api.themoviedb.org/3/search/movie`,
-    options
-  );
+  const response = await axios.get<NotesHttpResponse>(`https://`, options);
 
   return response.data;
 };
