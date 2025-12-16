@@ -3,29 +3,27 @@ import Loader from "../Loader/Loader";
 import { Toaster } from "react-hot-toast";
 import css from "./App.module.css";
 import Pagination from "../Pagination/Pagination";
+import NoteList from "../NoteList/NoteList";
+import SearchBox from "../SearchBox/SearchBox";
 
 function App() {
   return (
     <>
       <div className={css.app}>
-        {2 > 1 && (
+        <header className={css.toolbar}>
+          <SearchBox />
           <Pagination
             totalPages={totalPages}
             currentPage={currentPage}
             setCurrentPage={setCurrentPage}
           />
-        )}
-        {isLoading && <Loader />}
-        {isError && <ErrorMessage error={error.message} />}
-        {totalPages > 1 && (
-          <Pagination
-            totalPages={totalPages}
-            currentPage={currentPage}
-            setCurrentPage={setCurrentPage}
-          />
-        )}
-        <Toaster position="top-center" reverseOrder={true} />
+          <button className={css.button}>Create note +</button>
+        </header>
+        <NoteList />
+        <Loader />
+        <ErrorMessage error={error.message} />
       </div>
+      <Toaster position="top-center" reverseOrder={true} />
     </>
   );
 }

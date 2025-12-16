@@ -1,5 +1,5 @@
 import axios from "axios";
-import type { Note } from "../types/movie";
+import type { Note } from "../types/note";
 
 export interface NotesHttpResponse {
   results: Note[];
