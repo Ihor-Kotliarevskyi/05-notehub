@@ -13,15 +13,15 @@ function App() {
         <header className={css.toolbar}>
           <SearchBox />
           <Pagination
-            totalPages={totalPages}
-            currentPage={currentPage}
-            setCurrentPage={setCurrentPage}
+            totalPages={1}
+            currentPage={1}
+            setCurrentPage={() => {}}
           />
           <button className={css.button}>Create note +</button>
         </header>
         <NoteList />
         <Loader />
-        <ErrorMessage error={error.message} />
+        <ErrorMessage error={"error.message"} />
       </div>
       <Toaster position="top-center" reverseOrder={true} />
     </>

@@ -8,10 +8,9 @@ export interface NotesHttpResponse {
 }
 
 const MY_KEY = import.meta.env.VITE_NOTEHUB_TOKEN;
+const BASE_URL = "https://notehub-public.goit.study/api";
 
-export const fetchMovies = async (
-  query: string
-): Promise<NotesHttpResponse> => {
+export const fetchNotes = async (query: string): Promise<NotesHttpResponse> => {
   const options = {
     params: {
       query,
@@ -22,7 +21,7 @@ export const fetchMovies = async (
     },
   };
 
-  const response = await axios.get<NotesHttpResponse>(`https://`, options);
+  const response = await axios.get<NotesHttpResponse>(BASE_URL, options);
 
   return response.data;
 };
