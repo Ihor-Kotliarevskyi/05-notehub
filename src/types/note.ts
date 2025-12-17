@@ -7,4 +7,11 @@ export interface Note {
   tag: string;
 }
 
-export type NoteTag = string;
+export interface CreateNote {
+  title: string;
+  content: string;
+}
+
+export interface UpdateNote {
+  tag: string;
+}
