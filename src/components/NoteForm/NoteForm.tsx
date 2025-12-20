@@ -4,7 +4,7 @@ import { useId } from "react";
 import * as Yup from "yup";
 
 interface NoteFormProps {
-  onClose: () => void;
+  readonly onClose: () => void;
 }
 
 interface NoteFormValues {
@@ -23,11 +23,11 @@ const validationSchema = Yup.object().shape({
   title: Yup.string()
     .min(3, "Title too short")
     .max(50, "Title too long")
-    .required("Title is requared field"),
+    .required("Title is required field"),
   content: Yup.string().max(500, "Content too long"),
   tag: Yup.string()
     .oneOf(["Todo", "Work", "Personal", "Meeting", "Shopping"])
-    .required("Tag is requared field"),
+    .required("Tag is required field"),
 });
 
 function NoteForm({ onClose }: NoteFormProps) {

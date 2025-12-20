@@ -4,7 +4,11 @@ import { createPortal } from "react-dom";
 
 interface ModalProps {
   onClose: () => void;
-  children: ReactNode;
+  children: ReactNode | React.ReactElement<{ onClose?: () => void }>;
+}
+
+interface ChildProps {
+  onClose?: () => void;
 }
 
 function Modal({ onClose, children }: ModalProps) {
@@ -36,7 +40,9 @@ function Modal({ onClose, children }: ModalProps) {
       aria-modal="true"
     >
       <div className={css.modal} onClick={(e) => e.stopPropagation()}>
-        {React.cloneElement(children, { onClose })}
+        {React.isValidElement<ChildProps>(children)
+          ? React.cloneElement(children, { onClose })
+          : children}
       </div>
     </div>,
     document.body

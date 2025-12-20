@@ -10,10 +10,16 @@ import { fetchNotes, type NotesHttpResponse } from "../../services/noteService";
 import { useState } from "react";
 import Modal from "../Modal/Modal";
 import NoteForm from "../NoteForm/NoteForm";
+import { useDebouncedCallback } from "use-debounce";
 
 function App() {
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [isOpenModal, setIsOpenModal] = useState<boolean>(false);
+  const [searchText, setSearchText] = useState<string>("");
+
+  const debouncedSearch = useDebouncedCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchText(e.target.value);
+  }, 1000)
 
   const {
     data: { notes = [], totalPages = 0 } = {},
@@ -21,15 +27,15 @@ function App() {
     isError,
     error,
   } = useQuery<NotesHttpResponse, Error>({
-    queryKey: ["notes", currentPage],
-    queryFn: () => fetchNotes(currentPage),
+    queryKey: ["notes", currentPage, searchText],
+    queryFn: () => fetchNotes(searchText, currentPage),
   });
 
   return (
     <>
       <div className={css.app}>
         <header className={css.toolbar}>
-          <SearchBox />
+          <SearchBox search={searchText} onChange={debouncedSearch}/>
           {totalPages > 1 && (
             <Pagination
               totalPages={totalPages}

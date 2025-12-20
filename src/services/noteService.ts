@@ -10,9 +10,10 @@ const MY_KEY = import.meta.env.VITE_NOTEHUB_TOKEN;
 
 axios.defaults.baseURL = "https://notehub-public.goit.study/api";
 
-export const fetchNotes = async (page: number): Promise<NotesHttpResponse> => {
+export const fetchNotes = async (searchText: string, page: number): Promise<NotesHttpResponse> => {
   const options = {
     params: {
+      ...(searchText !== "" && { search: searchText }),
       page,
       perPage: 12,
     },
