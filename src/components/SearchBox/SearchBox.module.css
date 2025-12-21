@@ -6,3 +6,9 @@
   border: 1px solid #ced4da;
   border-radius: 4px;
 }
+
+.input:focus,
+.input:hover {
+  outline: 1px solid #0a66c2;
+  border: none;
+}
