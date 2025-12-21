@@ -44,5 +44,5 @@ export const deleteNote = async (id: Note["id"]): Promise<void> => {
       Authorization: `Bearer ${MY_KEY}`,
     },
   };
-  await axios.delete<void>(`/notes/${id}`, options);
+  await axios.delete<Note>(`/notes/${id}`, options);
 };
