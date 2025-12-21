@@ -19,7 +19,8 @@ function App() {
 
   const debouncedSearch = useDebouncedCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchText(e.target.value);
-  }, 1000)
+    setCurrentPage(1)
+  }, 500)
 
   const {
     data: { notes = [], totalPages = 0 } = {},
@@ -54,7 +55,7 @@ function App() {
         </header>
         {notes.length > 0 && <NoteList notes={notes || []} />}
         {isLoading && <Loader />}
-        {isError && <ErrorMessage error={error?.message || "Ooops"} />}
+        {isError && <ErrorMessage error={error?.message} />}
       </div>
       {isOpenModal && (
         <Modal
@@ -65,7 +66,7 @@ function App() {
           <NoteForm onClose={() => {}} />
         </Modal>
       )}
-      <Toaster position="top-center" reverseOrder={true} />
+      <Toaster position="bottom-center" reverseOrder={true} />
     </>
   );
 }

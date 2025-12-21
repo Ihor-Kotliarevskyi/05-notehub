@@ -26,29 +26,23 @@ export const fetchNotes = async (searchText: string, page: number): Promise<Note
   return response.data;
 };
 
-export const createNote = async (payload: CreateNote): Promise<Note> => {
+export const createNote = async (newNote: CreateNote): Promise<Note> => {
   const options = {
-    params: {
-      payload,
-    },
     headers: {
       accept: "application/json",
       Authorization: `Bearer ${MY_KEY}`,
     },
   };
-  const response = await axios.post<Note>("/notes", options);
+  const response = await axios.post<Note>("/notes", newNote, options);
   return response.data;
 };
 
-export const deleteNote = async (noteId: Note["id"]): Promise<void> => {
+export const deleteNote = async (id: Note["id"]): Promise<void> => {
   const options = {
-    params: {
-      noteId,
-    },
     headers: {
       accept: "application/json",
       Authorization: `Bearer ${MY_KEY}`,
     },
   };
-  await axios.delete<void>("/notes", options);
+  await axios.delete<void>(`/notes/${id}`, options);
 };

@@ -1,7 +1,7 @@
 import css from "./ErrorMessage.module.css";
 
 interface ErrorMessageProps {
-  error: string | null;
+  readonly error: string | null;
 }
 
 function ErrorMessage({ error }: ErrorMessageProps) {
